@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Card, Stack, Text } from "@chakra-ui/react";
 import SuggestedFeature from "@/features/components/SuggestedFeature";

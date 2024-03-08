@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { ThreadType } from "./ThreadType";
+// import { ThreadType } from "./ThreadType";
 import { UserType } from "./UserType";
 
 // export type ReplyType= {

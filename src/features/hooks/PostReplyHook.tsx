@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FormReplyType } from "@/Types/ReplyType";
 import { API } from "@/libs/API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
 	Avatar,
 	Box,
-	Button,
+	// Button,
 	Card,
 	CardBody,
 	CardHeader,
@@ -14,9 +13,9 @@ import {
 	Text,
 } from "@chakra-ui/react";
 import { useGetUser } from "../hooks/GetUserHook";
-import { API } from "@/libs/API";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+// import { API } from "@/libs/API";
+// import { useMutation, useQueryClient } from "@tanstack/react-query";
+// import { useState } from "react";
 
 // type UserType = {
 // 	id: number;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { API } from "@/libs/API";
 import { useQuery } from "@tanstack/react-query";
 // import { FormThreadType } from "@/Types/ThreadType";

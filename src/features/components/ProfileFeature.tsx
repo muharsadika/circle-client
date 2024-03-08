@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { RootState } from "@/store/type/RootState";
 import {
     Avatar,

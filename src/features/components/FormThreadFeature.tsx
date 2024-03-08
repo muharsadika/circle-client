@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Avatar, Box, Button, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, VStack } from '@chakra-ui/react'
+import { Avatar, Button, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, VStack } from '@chakra-ui/react'
 import { usePostThread } from '../hooks/PostThreadHook'
 import { IoMdImages } from "react-icons/io";
 

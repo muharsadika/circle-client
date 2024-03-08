@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import NavbarComponent from "@/components/Navbar/Navbar";
 import SuggestedComponent from "@/components/Suggested/Suggested";
 import FooterComponent from "@/components/Footer/Footer";
-import { Box, Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import ProfileFeature from "../components/Profile/Profile";
 
@@ -16,10 +15,10 @@ export default function Main({ children }: { children: ReactNode }) {
 				<GridItem
 					w={"90%"}
 					borderX={"1px solid grey"}
-				// border={"1px solid grey"}
-				// mx={-5}
-				// borderRadius={"10px"}
-				my={-1}
+					// border={"1px solid grey"}
+					// mx={-5}
+					// borderRadius={"10px"}
+					my={-1}
 				// py={-1}
 				>
 					{children}

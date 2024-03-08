@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Avatar, Box, Flex, HStack, Image, Text, VStack, Stack } from "@chakra-ui/react";
-import { BsDot } from "react-icons/bs";
+import { Avatar, HStack, Image, Text, VStack } from "@chakra-ui/react";
+// import { BsDot } from "react-icons/bs";
 import { AiFillHeart } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 import { useState } from "react";
@@ -82,11 +81,11 @@ export default function ThreadFeature(props: ThreadType) {
                             {content}
                         </Text>
 
-                        {image && <Image 
-                        src={image} 
-                        alignSelf={"flex-start"}
-                        borderRadius={10}
-                        maxWidth={"300px"}
+                        {image && <Image
+                            src={image}
+                            alignSelf={"flex-start"}
+                            borderRadius={10}
+                            maxWidth={"300px"}
                         />}
                     </VStack>
 
