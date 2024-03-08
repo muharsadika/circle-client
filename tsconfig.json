@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": [
+    "src",
+    "../#/FormThreadDetailFeature.tsx",
+    "../#/PostThreadDetailHook.tsx",
+    "../#/GetReplyHook.tsx",
+    "../#/ThreadDetail[5-11-23]",
+    "../#/Thread",
+    "../#/ReplyFeature.tsx",
+    "src/components/Profile/Profile.tsx"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
