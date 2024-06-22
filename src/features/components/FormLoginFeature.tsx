@@ -11,7 +11,7 @@ export default function FormLoginFeature() {
       isRequired
       display={'flex'}
       flexDirection={'column'}
-      gap={3}
+      gap={5}
       width={'25%'}
       bg={'blackAlpha.50'}
       color={'white'}
@@ -45,20 +45,22 @@ export default function FormLoginFeature() {
         </Text>
       </Text>
 
-      <Input placeholder="Username" name="username" onChange={handleChange} />
+      <Box display={'flex'} flexDirection={'column'} gap={3}>
+        <Input placeholder="Username" name="username" onChange={handleChange} />
 
-      <Input
-        type="password"
-        placeholder="Password"
-        name="password"
-        onChange={handleChange}
-        onKeyDown={handleLogin}
-        onKeyPress={(event) => {
-          if (event.key === 'Enter') {
-            handleLogin();
-          }
-        }}
-      />
+        <Input
+          type="password"
+          placeholder="Password"
+          name="password"
+          onChange={handleChange}
+          onKeyDown={handleLogin}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              handleLogin();
+            }
+          }}
+        />
+      </Box>
 
       <Box display="flex" justifyContent={'flex-end'}>
         <Text color="blue.700" cursor={'pointer'} _hover={{ color: 'blue.500' }}>
