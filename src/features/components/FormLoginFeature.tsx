@@ -1,8 +1,10 @@
 import { FormControl, Input, Text, Button, Box } from '@chakra-ui/react';
 import { FormLoginHook } from '../hooks/FormLoginHook';
+import { useNavigate } from 'react-router-dom';
 
 export default function FormLoginFeature() {
   const { handleChange, handleLogin } = FormLoginHook();
+  const navigate = useNavigate();
 
   return (
     <FormControl
@@ -17,13 +19,30 @@ export default function FormLoginFeature() {
       borderRadius={20}
       padding={5}
     >
-      <Text color={'blue.500'} fontSize={'9xl'} fontWeight={'bold'} marginTop={-50}>
+      <Text
+        color={'blue.500'}
+        fontSize={'9xl'}
+        fontWeight={'bold'}
+        marginTop={-50}
+        _hover={{ color: 'blue.300', cursor: 'pointer' }}
+        onClick={() => navigate('/home')}
+      >
         Circle
       </Text>
 
-      <Text fontSize={'2xl'} fontWeight={'bold'} display={'flex'} gap={1}>
-        <Text>Login</Text>
-        <Text color="blue.500">Circle</Text>
+      <Text display={'flex'} gap={1}>
+        <Text fontSize={'2xl'} fontWeight={'medium'}>
+          Login
+        </Text>
+        <Text
+          fontSize={'2xl'}
+          fontWeight={'bold'}
+          color="blue.500"
+          _hover={{ color: 'blue.300', cursor: 'pointer' }}
+          onClick={() => navigate('/home')}
+        >
+          Circle
+        </Text>
       </Text>
 
       <Input placeholder="Username" name="username" onChange={handleChange} />
