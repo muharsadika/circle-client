@@ -1,51 +1,70 @@
-import { FormControl, Input, Text, Button } from "@chakra-ui/react";
-import { FormRegisterHook } from "../hooks/FormRegisterHook";
-
+import { FormControl, Input, Text, Button, Box } from '@chakra-ui/react';
+import { FormRegisterHook } from '../hooks/FormRegisterHook';
+import { useNavigate } from 'react-router-dom';
 
 export default function FormRegisterFeature() {
-    const { handleChange, handleRegister } = FormRegisterHook();
+  const { handleChange, handleRegister } = FormRegisterHook();
+  const navigate = useNavigate();
 
-    return (
-        <FormControl
-            isRequired
-            display={"flex"}
-            flexDirection={"column"}
-            gap={3}
-            width={"350px"}
-            bg={"transparent"}
-            color={"white"}
-            border={"1px solid white"}
-            borderRadius={10}
-            padding={5}
+  return (
+    <FormControl
+      isRequired
+      width={'25%'}
+      display={'flex'}
+      flexDirection={'column'}
+      gap={5}
+      bg={'blackAlpha.50'}
+      color={'white'}
+      borderRadius={20}
+      padding={5}
+      border={'1px solid white'}
+    >
+      <Text
+        color={'blue.500'}
+        fontSize={'9xl'}
+        fontWeight={'bold'}
+        marginTop={-50}
+        _hover={{ color: 'blue.300', cursor: 'pointer' }}
+        onClick={() => navigate('/home')}
+      >
+        Circle
+      </Text>
+
+      <Text display={'flex'} gap={1}>
+        <Text fontSize={'2xl'} fontWeight={'medium'}>
+          Create Account
+        </Text>
+        <Text
+          fontSize={'2xl'}
+          fontWeight={'bold'}
+          color={'blue.500'}
+          _hover={{ color: 'blue.300', cursor: 'pointer' }}
+          onClick={() => navigate('/home')}
         >
+          Circle
+        </Text>
+      </Text>
 
-            <Text color={"messenger.500"} fontSize={"2xl"} fontWeight={"bold"}>
-                Circle
-            </Text>
+      <Box display={'flex'} flexDirection={'column'} gap={3}>
+        <Input placeholder="Full Name" name="full_name" onChange={handleChange} />
+        <Input placeholder="Email" name="email" onChange={handleChange} />
+        <Input placeholder="Username" name="username" onChange={handleChange} />
+        <Input
+          type="password"
+          placeholder="Password"
+          name="password"
+          onChange={handleChange}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              handleRegister();
+            }
+          }}
+        />
+      </Box>
 
-            <Text fontSize={"2xl"} fontWeight={"bold"} display={"flex"} gap={1}>
-                <Text>Create Account</Text>
-                <Text color={"messenger.500"}>Circle</Text>
-            </Text>
-
-            <Input placeholder="Full Name" name="full_name" onChange={handleChange} />
-            <Input placeholder="Email" name="email" onChange={handleChange} />
-            <Input placeholder="Username" name="username" onChange={handleChange} />
-            <Input type="password" placeholder="Password" name="password" onChange={handleChange}
-                onKeyPress={(event) => {
-                    if (event.key === "Enter") {
-                        handleRegister();
-                    }
-                }} />
-
-            <Button
-                backgroundColor={"messenger.500"}
-                colorScheme="messenger.500"
-                color={"white"}
-                onClick={handleRegister}>
-                Create
-            </Button>
-
-        </FormControl>
-    );
+      <Button colorScheme="blue" onClick={handleRegister} marginTop={5}>
+        Create
+      </Button>
+    </FormControl>
+  );
 }
