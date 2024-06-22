@@ -23,12 +23,12 @@ export default function Login() {
         <Text
           fontSize={'sm'}
           color={'blue.500'}
+          fontWeight={'medium'}
           cursor={'pointer'}
           _hover={{ color: 'blue.300', cursor: 'pointer' }}
           onClick={() => navigate('/register')}
         >
-          {' '}
-          Create account{' '}
+          Create account
         </Text>
       </Box>
     </Box>
