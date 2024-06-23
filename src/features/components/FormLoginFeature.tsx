@@ -1,25 +1,30 @@
-import { FormControl, Input, Text, Button, Box } from '@chakra-ui/react';
+import { FormControl, Input, Text, Button, Box, useBreakpointValue } from '@chakra-ui/react';
 import { FormLoginHook } from '../hooks/FormLoginHook';
 import { useNavigate } from 'react-router-dom';
 
 export default function FormLoginFeature() {
-  const { handleChange, handleLogin } = FormLoginHook();
+  const { handleChange, onSubmit } = FormLoginHook();
   const navigate = useNavigate();
+  const formWidth = useBreakpointValue({ base: '100%', md: '50%', lg: '30%' });
+  const titleForm = useBreakpointValue({ base: 'none', md: 'flex', lg: 'flex' });
 
   return (
     <FormControl
       isRequired
+      as="form"
       display={'flex'}
       flexDirection={'column'}
       gap={5}
-      width={'25%'}
+      width={formWidth}
       bg={'blackAlpha.50'}
       color={'white'}
       border={'1px solid white'}
       borderRadius={20}
       padding={5}
+      onSubmit={onSubmit}
     >
       <Text
+        display={titleForm}
         color={'blue.500'}
         fontSize={'9xl'}
         fontWeight={'bold'}
@@ -47,19 +52,7 @@ export default function FormLoginFeature() {
 
       <Box display={'flex'} flexDirection={'column'} gap={3}>
         <Input placeholder="Username" name="username" onChange={handleChange} />
-
-        <Input
-          type="password"
-          placeholder="Password"
-          name="password"
-          onChange={handleChange}
-          onKeyDown={handleLogin}
-          onKeyPress={(event) => {
-            if (event.key === 'Enter') {
-              handleLogin();
-            }
-          }}
-        />
+        <Input type="password" placeholder="Password" name="password" onChange={handleChange} />
       </Box>
 
       <Box display="flex" justifyContent={'flex-end'}>
@@ -68,7 +61,7 @@ export default function FormLoginFeature() {
         </Text>
       </Box>
 
-      <Button colorScheme="blue" onClick={handleLogin}>
+      <Button colorScheme="blue" type="submit" w="100%" mt={5}>
         Login
       </Button>
     </FormControl>
