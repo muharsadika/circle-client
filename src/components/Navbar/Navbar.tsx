@@ -1,71 +1,102 @@
-import { Box, Button, HStack, Heading, Stack, Text } from '@chakra-ui/react';
-import { AiOutlineUser, AiOutlineHeart, AiOutlineHome } from 'react-icons/ai';
-import { TbUserSearch } from 'react-icons/tb';
-import { BiLogOut } from 'react-icons/bi';
+import { Button, Heading, Stack, Text, VStack } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { AUTH_LOGOUT } from '@/store/RootReducer';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { GoHome } from 'react-icons/go';
+import { GoSearch } from 'react-icons/go';
+import { GoMail } from 'react-icons/go';
+import { IoSettingsOutline } from 'react-icons/io5';
+import { IoPersonOutline } from 'react-icons/io5';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/type/RootState';
 
 export default function NavbarComponent() {
+  const user = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function handleLogout() {
-    // dispatch({ type: AUTH_LOGOUT });
     dispatch(AUTH_LOGOUT());
     navigate('/login');
   }
 
-  return (
-    <>
-      <Stack h="full" justify="space-between">
-        <Box>
-          <Heading color="messenger.500">circle</Heading>
-          <Stack my={8} spacing={10}>
-            <Link to={`/home`}>
-              <HStack cursor="pointer" color="white">
-                <AiOutlineHome size={40} />
-                <Text fontSize="lg">Home</Text>
-              </HStack>
-            </Link>
-            <Link to={`/search`}>
-              <HStack cursor="pointer" color="white">
-                <TbUserSearch size={40} />
-                <Text fontSize="lg">Search</Text>
-              </HStack>
-            </Link>
-            <Link to={`/follow`}>
-              <HStack cursor="pointer" color="white">
-                <AiOutlineHeart size={40} />
-                <Text fontSize="lg">Follows</Text>
-              </HStack>
-            </Link>
-            <Link to={`/profile`}>
-              <HStack cursor="pointer" color="white">
-                <AiOutlineUser size={40} />
-                <Text fontSize="lg">Profile</Text>
-              </HStack>
-            </Link>
-          </Stack>
+  const menuButtonStyle = {
+    justifyContent: 'start',
+    w: 'full',
+    gap: 5,
+    color: 'white',
+    bgColor: 'transparent',
+    _hover: { bgColor: 'rgb(125, 125, 125, 0.1)' },
+    borderRadius: 'full',
+    fontSize: 'lg',
+    fontWeight: 'normal',
+  };
 
-          <Button size="lg" rounded="full" colorScheme="messenger" w={'full'}>
-            Create Post
-          </Button>
-        </Box>
+  const logoutButtonStyle = {
+    ...menuButtonStyle,
+    w: '50%',
+    mx: 'auto',
+    justifyContent: 'center',
+    fontSize: 'xs',
+    color: 'whiteAlpha.500',
+    gap: 1,
+  };
+
+  return (
+    <Stack gap={10}>
+      <Heading
+        size={'3xl'}
+        color="blue.500"
+        alignSelf={'center'}
+        onClick={() => navigate('/home')}
+        _hover={{ color: 'white', cursor: 'pointer' }}
+      >
+        Circle
+      </Heading>
+
+      <VStack mx={'auto'} gap={3}>
+        <Button {...menuButtonStyle} onClick={() => navigate('/home')}>
+          <GoHome size={25} />
+          <Text>Home</Text>
+        </Button>
+
+        <Button {...menuButtonStyle} onClick={() => navigate('/explore')}>
+          <GoSearch size={25} />
+          Explore
+        </Button>
+
+        <Button {...menuButtonStyle} onClick={() => navigate('/message')}>
+          <GoMail size={25} />
+          Message
+        </Button>
+
+        <Button {...menuButtonStyle} onClick={() => navigate('/profile')}>
+          <IoPersonOutline size={25} />
+          Profile
+        </Button>
+
+        <Button {...menuButtonStyle} onClick={() => navigate('/setting')}>
+          <IoSettingsOutline size={25} />
+          Setting
+        </Button>
 
         <Button
-          fontWeight="light"
-          color="white"
-          display="flex"
-          justifyContent="start"
-          leftIcon={<BiLogOut size={30} />}
-          colorScheme="teal"
-          variant="unstyled"
-          onClick={handleLogout}
+          w={'200%'}
+          size={'lg'}
+          borderRadius={'full'}
+          bgColor={'blue.500'}
+          color={'white'}
+          _hover={{ bgColor: 'white', color: 'blue.500' }}
+          onClick={() => navigate('/post')}
         >
-          Logout
+          Post
         </Button>
-      </Stack>
-    </>
+      </VStack>
+
+      <Button {...logoutButtonStyle} onClick={handleLogout}>
+        <Text>Log out</Text>
+        <Text color={'blue.500'}>@{user.username}</Text>
+      </Button>
+    </Stack>
   );
 }
