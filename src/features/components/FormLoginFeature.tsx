@@ -1,12 +1,16 @@
 import { FormControl, Input, Text, Button, Box, useBreakpointValue } from '@chakra-ui/react';
 import { FormLoginHook } from '../hooks/FormLoginHook';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function FormLoginFeature() {
   const { handleChange, onSubmit } = FormLoginHook();
   const navigate = useNavigate();
   const formWidth = useBreakpointValue({ base: '100%', md: '50%', lg: '30%' });
   const titleForm = useBreakpointValue({ base: 'none', md: 'flex', lg: 'flex' });
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   return (
     <FormControl
@@ -51,8 +55,29 @@ export default function FormLoginFeature() {
       </Text>
 
       <Box display={'flex'} flexDirection={'column'} gap={3}>
-        <Input placeholder="Username" name="username" onChange={handleChange} />
-        <Input type="password" placeholder="Password" name="password" onChange={handleChange} />
+        <Box>
+          <Input placeholder="Username" name="username" onChange={handleChange} />
+        </Box>
+
+        <Box position="relative">
+          <Input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Password"
+            name="password"
+            onChange={handleChange}
+          />
+          <Button
+            onClick={togglePasswordVisibility}
+            position={'absolute'}
+            right={'1px'}
+            top={'50%'}
+            transform={'translateY(-50%)'}
+            variant={'unstyled'}
+            color={'gray.500'}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </Button>
+        </Box>
       </Box>
 
       <Box display="flex" justifyContent={'flex-end'}>
