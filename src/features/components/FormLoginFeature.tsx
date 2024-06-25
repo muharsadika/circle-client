@@ -27,19 +27,19 @@ export default function FormLoginFeature() {
       padding={5}
       onSubmit={onSubmit}
     >
-      <Text
-        display={titleForm}
-        color={'blue.500'}
-        fontSize={'9xl'}
-        fontWeight={'bold'}
-        marginTop={-50}
-        _hover={{ color: 'blue.300', cursor: 'pointer' }}
-        onClick={() => navigate('/home')}
-      >
-        Circle
-      </Text>
+      <Box display={titleForm} justifyContent={'center'} marginTop={-10}>
+        <Text
+          color={'blue.500'}
+          fontSize={'9xl'}
+          fontWeight={'bold'}
+          _hover={{ color: 'blue.300', cursor: 'pointer' }}
+          onClick={() => navigate('/home')}
+        >
+          Circle
+        </Text>
+      </Box>
 
-      <Text display={'flex'} gap={1}>
+      <Box display={'flex'} gap={1}>
         <Text fontSize={'2xl'} fontWeight={'medium'}>
           Login
         </Text>
@@ -52,7 +52,7 @@ export default function FormLoginFeature() {
         >
           Circle
         </Text>
-      </Text>
+      </Box>
 
       <Box display={'flex'} flexDirection={'column'} gap={3}>
         <Box>
