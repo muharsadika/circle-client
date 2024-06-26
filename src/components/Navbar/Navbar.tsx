@@ -26,10 +26,19 @@ export default function NavbarComponent() {
     gap: 5,
     color: 'white',
     bgColor: 'transparent',
-    _hover: { bgColor: 'rgb(125, 125, 125, 0.1)', color: 'red.500' },
+    _hover: { bgColor: 'rgb(125, 125, 125, 0.1)' },
     borderRadius: 'full',
     fontSize: 'lg',
     fontWeight: 'normal',
+  };
+
+  const activeMenuStyle = {
+    ...menuButtonStyle,
+    fontWeight: 'bold',
+  };
+
+  const isActiveMenu = (path: string) => {
+    return window.location.pathname === path;
   };
 
   return (
@@ -45,27 +54,42 @@ export default function NavbarComponent() {
       </Heading>
 
       <VStack mx={'auto'} gap={3}>
-        <Button {...menuButtonStyle} onClick={() => navigate('/home')}>
+        <Button
+          {...(isActiveMenu('/home') ? activeMenuStyle : menuButtonStyle)}
+          onClick={() => navigate('/home')}
+        >
           <GoHome size={25} />
           <Text>Home</Text>
         </Button>
 
-        <Button {...menuButtonStyle} onClick={() => navigate('/explore')}>
+        <Button
+          {...(isActiveMenu('/explore') ? activeMenuStyle : menuButtonStyle)}
+          onClick={() => navigate('/explore')}
+        >
           <GoSearch size={25} />
           Explore
         </Button>
 
-        <Button {...menuButtonStyle} onClick={() => navigate('/message')}>
+        <Button
+          {...(isActiveMenu('/message') ? activeMenuStyle : menuButtonStyle)}
+          onClick={() => navigate('/message')}
+        >
           <GoMail size={25} />
           Message
         </Button>
 
-        <Button {...menuButtonStyle} onClick={() => navigate('/profile')}>
+        <Button
+          {...(isActiveMenu('/profile') ? activeMenuStyle : menuButtonStyle)}
+          onClick={() => navigate('/profile')}
+        >
           <IoPersonOutline size={25} />
           Profile
         </Button>
 
-        <Button {...menuButtonStyle} onClick={() => navigate('/setting')}>
+        <Button
+          {...(isActiveMenu('/setting') ? activeMenuStyle : menuButtonStyle)}
+          onClick={() => navigate('/setting')}
+        >
           <IoSettingsOutline size={25} />
           Setting
         </Button>
