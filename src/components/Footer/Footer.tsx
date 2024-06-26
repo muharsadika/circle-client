@@ -1,51 +1,68 @@
-import { Box, Card, Flex, Image, Text } from "@chakra-ui/react";
-import {
-    BiLogoFacebook,
-    BiLogoGithub,
-    BiLogoInstagramAlt,
-    BiLogoYoutube,
-} from "react-icons/bi";
+import { Box, Card, CardBody, CardHeader, Heading, Image, Text } from '@chakra-ui/react';
+import { BiLogoFacebook, BiLogoGithub, BiLogoInstagramAlt, BiLogoYoutube } from 'react-icons/bi';
 
 export default function FooterComponent() {
-    return (
-        <Card
-            as={Flex}
-            basis="10%"
-            direction="column"
-            gap={4}
-            p={4}
-            bg="whiteAlpha.200"
-            color="white">
-            <Flex gap={4} flexDirection={"column"}>
-                <Text fontSize={"sm"}>
-                    Developed by{" "}
-                    <Text as="span" fontWeight={600}>
-                        Muhar Sadika
-                    </Text>
-                </Text>
-                <Box as={Flex} gap={1}>
-                    <BiLogoGithub />
-                    <BiLogoFacebook />
-                    <BiLogoInstagramAlt />
-                    <BiLogoYoutube />
-                </Box>
-            </Flex>
-            <Flex gap={2} align="center" color="whiteAlpha.600">
-                <Text fontSize="xs">Powered by</Text>
-                <Image display="inline" h="16px" src="./src/assets/logo.png" />
-                <Text fontSize="xs">Dumbways Indonesia</Text>
-            </Flex>
-        </Card>
-        // <Card bg={"transparent"} border="1px solid white" color={"white"}>
-        // 	<CardBody display={"flex"} alignItems={"center"} gap={2}>
-        // 		<Text fontSize={"12px"} fontWeight={"bold"}>
-        // 			Developed by Jhon Doe
-        // 		</Text>
-        // 		<AiFillGithub />
-        // 		<AiFillLinkedin />
-        // 		<AiFillFacebook />
-        // 		<AiFillInstagram />
-        // 	</CardBody>
-        // </Card>
-    );
+  return (
+    <Card bg={'whiteAlpha.100'} rounded={'2xl'}>
+      <CardHeader>
+        <Heading color={'white'} size={'xs'} fontWeight={'medium'} display={'flex'} gap={1}>
+          <Text>Developed by</Text>
+          <Text
+            color="blue.500"
+            fontWeight={'bold'}
+            onClick={() => window.open('https://github.com/MuharSadika')}
+            _hover={{ cursor: 'pointer' }}
+          >
+            Muhar Sadika
+          </Text>
+        </Heading>
+      </CardHeader>
+
+      <CardBody>
+        <Box display={'flex'} flexDirection={'column'} gap={2}>
+          <Box display={'flex'} gap={1} color={'white'}>
+            <Text
+              fontSize={20}
+              onClick={() => window.open('https://github.com/MuharSadika')}
+              _hover={{ cursor: 'pointer' }}
+            >
+              <BiLogoGithub />
+            </Text>
+
+            <Text
+              fontSize={20}
+              onClick={() => window.open('https://www.facebook.com/muharsadika')}
+              _hover={{ cursor: 'pointer' }}
+            >
+              <BiLogoFacebook />
+            </Text>
+
+            <Text
+              fontSize={20}
+              onClick={() => window.open('https://www.instagram.com/muharsadika')}
+              _hover={{ cursor: 'pointer' }}
+            >
+              <BiLogoInstagramAlt />
+            </Text>
+
+            <Text
+              fontSize={20}
+              onClick={() =>
+                window.open('https://www.youtube.com/channel/UC9bqQjXtQOj5h2T5vZtBQWg')
+              }
+              _hover={{ cursor: 'pointer' }}
+            >
+              <BiLogoYoutube />
+            </Text>
+          </Box>
+
+          <Box display={'flex'} gap={2} alignItems={'center'} color={'white'}>
+            <Text fontSize="xs">Powered by</Text>
+            <Image display="inline" h="16px" src="./src/assets/logo.png" />
+            <Text fontSize="xs">Dumbways Indonesia</Text>
+          </Box>
+        </Box>
+      </CardBody>
+    </Card>
+  );
 }
