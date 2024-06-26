@@ -58,7 +58,7 @@ export default function ProfileFeature() {
                 size="xs"
                 rounded="full"
                 variant="outline"
-                _hover={{ bg: 'white', color: 'blue.500' }}
+                _hover={{ bg: 'blue.500', color: 'white' }}
                 onClick={() => navigate('/profile/')}
               >
                 Edit Profile
