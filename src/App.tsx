@@ -9,7 +9,6 @@ import {
 import { RootState } from "./store/type/RootState";
 import { AUTH_CHECK, AUTH_ERROR } from "./store/RootReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { API, SetAuthToken } from "./libs/API";
 import Main from "./layout/Main";
 import Register from "./pages/Register";
@@ -19,19 +18,6 @@ import Search from "./pages/Search";
 import Follow from "./pages/Follow";
 import Profile from "./pages/Profile";
 import ThreadDetail from "./pages/ThreadDetail";
-
-const theme = extendTheme({
-  styles: {
-    global: {
-      body: {
-        bg: 'darkBackground',
-      }
-    }
-  },
-  colors: {
-    darkBackground: '#222'
-  }
-})
 
 export default function App() {
   const auth = useSelector((state: RootState) => state.auth);
@@ -86,7 +72,6 @@ export default function App() {
   return (
     <>
       {isLoading ? null : (
-        <ChakraProvider theme={theme}>
           <Routes>
             <Route path="/" element={<IsNotLogin />}>
               <Route path="/" element={<Main> <Timeline /> </Main>} />
@@ -102,8 +87,6 @@ export default function App() {
               <Route path="/login" element={<Login />} />
             </Route>
           </Routes>
-        </ChakraProvider>
-
       )}
     </>
   );
