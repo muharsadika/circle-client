@@ -33,7 +33,7 @@ export default function SuggestedComponent() {
           {List.map((user: IUser) => (
             <SuggestedFeature
               key={user.id}
-              user_id={user.id}
+              id={user.id}
               username={user.username}
               full_name={user.full_name}
               profile_picture={user.profile_picture}
