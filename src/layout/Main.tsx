@@ -7,22 +7,22 @@ import ProfileFeature from '../components/Profile/Profile';
 
 export default function Main({ children }: { children: ReactNode }) {
   return (
-    <>
-      <Box display={'flex'} h={'100vh'} my={1}>
-        <Box w={'25%'}>
-          <NavbarComponent />
-        </Box>
-
-        <Box w={'50%'}>{children}</Box>
-
-        <Box w={'25%'}>
-          <Stack gap={5} w={'90%'} mx={'auto'}>
-            <ProfileFeature />
-            <SuggestedComponent />
-            <FooterComponent />
-          </Stack>
-        </Box>
+    <Box display={'flex'} h={'100vh'} my={1}>
+      <Box w={'25%'} position="fixed" left={5} top={1} bottom={1}>
+        <NavbarComponent />
       </Box>
-    </>
+
+      <Box w={'50%'} ml={'25%'} overflowY="auto" h="100%">
+        {children}
+      </Box>
+
+      <Box w={'25%'} position="fixed" right={5} top={1} bottom={1}>
+        <Stack gap={5} w={'90%'} mx={'auto'} h="100%" overflowY="auto">
+          <ProfileFeature />
+          <SuggestedComponent />
+          <FooterComponent />
+        </Stack>
+      </Box>
+    </Box>
   );
 }
