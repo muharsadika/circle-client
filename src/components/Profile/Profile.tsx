@@ -49,6 +49,7 @@ export default function ProfileFeature() {
                 src={user?.profile_picture}
                 alignSelf={'center'}
                 _hover={{ cursor: 'pointer' }}
+                onClick={() => navigate('/profile')}
               />
 
               <Button
@@ -58,7 +59,7 @@ export default function ProfileFeature() {
                 size="xs"
                 rounded="full"
                 variant="outline"
-                _hover={{ bg: 'blue.500', color: 'white' }}
+                _hover={{ bg: 'white', color: 'blue.500' }}
                 onClick={() => navigate('/profile/')}
               >
                 Edit Profile
