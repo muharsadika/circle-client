@@ -12,17 +12,15 @@ interface IUser {
 }
 
 export default function SuggestedFeature({ id, full_name, username, profile_picture }: IUser) {
-  const [followId, setFollowId] = useState({
-    id: id,
-  });
   const { GetUser, isLoading } = useGetUser();
-  const isFollowing = GetUser.following.some((follow: IUser) => follow.id === id);
+  const [targetUserID, setTargetUserID] = useState({ id });
+  const isFollowing = GetUser?.following?.some((follow: IUser) => follow.id === id);
   const [isHovered, setIsHovered] = useState(false);
 
   const queryClient = useQueryClient();
   const { mutate: handleFollow } = useMutation({
     mutationFn: () => {
-      return API.post(`follow`, followId);
+      return API.post(`follow`, targetUserID);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['User'] });
@@ -33,7 +31,7 @@ export default function SuggestedFeature({ id, full_name, username, profile_pict
   });
 
   function handleClick() {
-    setFollowId({ id: id });
+    setTargetUserID({ id });
     handleFollow();
   }
 
