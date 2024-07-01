@@ -1,88 +1,99 @@
-import { Avatar, Button, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, VStack } from '@chakra-ui/react'
-import { usePostThread } from '../hooks/PostThreadHook'
-import { IoMdImages } from "react-icons/io";
-
+import {
+  Avatar,
+  Button,
+  Divider,
+  Grid,
+  GridItem,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Textarea,
+} from '@chakra-ui/react';
+import { usePostThread } from '../hooks/PostThreadHook';
+import { IoImageOutline } from 'react-icons/io5';
 
 export default function FormThreadFeature() {
-    const { handleChange, handlePost, isOpen, onOpen, onClose, user, setImage } = usePostThread();
+  const { handleChange, handlePost, isOpen, onOpen, onClose, user, setImage, textareaRef } =
+    usePostThread();
 
+  return (
+    <>
+      <Grid templateRows={'repeat(1, 1fr)'} templateColumns={'repeat(8, 1fr)'} mx={5} my={3}>
+        <GridItem rowSpan={3} colSpan={1} display={'flex'} justifyContent={'center'}>
+          <Avatar size="md" name={user?.full_name} src={user?.profile_picture} />
+        </GridItem>
 
-    return (
-        <>
-            <HStack
-            // mt={5}
-            // mb={50}
-            // paddingBottom={5}
-            // justify="space-between"
-            // borderBottom={"1px solid black"}
-            // height={"100px"}
-            // border={"1px solid red"}
-            >
-                <VStack
-                    borderY={"1px solid grey"}
-                    // borderRadius={"10px"}
-                    px={10}
-                    py={5}
-                    // mt={5}
-                    w={"full"}
-                // align={"start"}
-                // border={"1px solid red"}
-                >
-                    <HStack justify={"space-between"} w={"full"}>
-                        <Stack>
-                            <Avatar size="lg" mr={5} name={user?.full_name} src={user?.profile_picture} />
-                        </Stack>
-                        <Stack>
-                            <Input
-                                variant="unstyled"
-                                color="whiteAlpha.400"
-                                placeholder="What is happening?!"
-                                _focus={{ color: 'white' }}
-                                name="content"
-                                onChange={handleChange}
-                                fontSize={"lg"}
-                            // mt={5}   
-                            />
-                        </Stack>
-                        <Stack>
-                            <IoMdImages size={40} color="white" cursor="pointer" onClick={onOpen} />
-                        </Stack>
-                    </HStack>
+        <GridItem colSpan={7} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+          <Textarea
+            color="white"
+            placeholder="What is happening?!"
+            onChange={handleChange}
+            border={'none'}
+            p={3}
+            ref={textareaRef}
+            fontSize={'lg'}
+          />
+        </GridItem>
 
-                    <HStack w={"100%"} justify={"end"} ml={5}>
-                        <Button colorScheme="messenger" size="xs" px={5} py={0} rounded="full" onClick={() => { handlePost() }}>
-                            Post
-                        </Button>
-                    </HStack>
-                </VStack>
-            </HStack>
+        <GridItem colSpan={7} my={2}>
+          <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.5)' }} />
+        </GridItem>
 
-            <Modal isOpen={isOpen} onClose={onClose} >
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Upload Image</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        <Input
-                            marginLeft={2}
-                            variant={"unstyled"}
-                            type="file"
-                            name="image"
-                            onChange={(e) => {
-                                if (e.target?.files) {
-                                    setImage(e.target?.files[0])
-                                } else {
-                                    setImage(null)
-                                }
-                            }}
-                        />
-                    </ModalBody>
-                    <ModalFooter gap={3}>
-                        {/* <Button colorScheme='green' onClick={handlePost}>Post</Button>
-                        <Button colorScheme='orange' onClick={onClose}>Close</Button> */}
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
-        </>
-    )
+        <GridItem
+          colSpan={5}
+          display={'flex'}
+          alignItems={'center'}
+          justifyContent={'start'}
+          mx={5}
+        >
+          <IoImageOutline size={25} color="rgb(29, 155, 240)" cursor="pointer" onClick={onOpen} />
+        </GridItem>
+
+        <GridItem colSpan={2} display={'flex'} alignItems={'center'} justifyContent={'end'}>
+          <Button
+            bgColor={'blue.500'}
+            color={'white'}
+            _hover={{ bgColor: 'white', color: 'blue.500' }}
+            size={'sm'}
+            px={5}
+            rounded={'full'}
+            onClick={() => {
+              handlePost();
+            }}
+          >
+            Post
+          </Button>
+        </GridItem>
+      </Grid>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Upload Image</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Input
+              marginLeft={2}
+              variant={'unstyled'}
+              type="file"
+              name="image"
+              onChange={(e) => {
+                if (e.target?.files) {
+                  setImage(e.target?.files[0]);
+                } else {
+                  setImage(null);
+                }
+              }}
+            />
+          </ModalBody>
+          <ModalFooter gap={3}></ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
 }
