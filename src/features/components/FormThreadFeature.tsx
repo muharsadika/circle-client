@@ -23,12 +23,18 @@ export default function FormThreadFeature() {
 
   return (
     <>
-      <Grid templateRows={'repeat(1, 1fr)'} templateColumns={'repeat(8, 1fr)'} mx={5} my={3}>
+      <Grid
+        templateRows={'repeat(1, 1fr)'}
+        templateColumns={'repeat(8, 1fr)'}
+        px={5}
+        py={3}
+        bgColor={'blackAlpha.300'}
+      >
         <GridItem rowSpan={3} colSpan={1} display={'flex'} justifyContent={'center'}>
           <Avatar size="md" name={user?.full_name} src={user?.profile_picture} />
         </GridItem>
 
-        <GridItem colSpan={7} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+        <GridItem colSpan={7} display={'flex'}>
           <Textarea
             color="white"
             placeholder="What is happening?!"
@@ -37,6 +43,7 @@ export default function FormThreadFeature() {
             p={3}
             ref={textareaRef}
             fontSize={'lg'}
+            minHeight={'50px'}
           />
         </GridItem>
 
