@@ -21,7 +21,7 @@ export default function SuggestedComponent() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <Card bg="whiteAlpha.100" rounded={'2xl'}>
+    <Card bg={'#333333'} rounded={'2xl'}>
       <CardHeader>
         <Heading color={'white'} size={'xs'} fontWeight={'medium'}>
           Suggested for you

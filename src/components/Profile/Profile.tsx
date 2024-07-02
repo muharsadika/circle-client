@@ -26,9 +26,9 @@ export default function ProfileFeature() {
   }
 
   return (
-    <Card background="whiteAlpha.200" rounded="2xl">
+    <Card background={'#333333'} rounded={'2xl'}>
       <CardHeader>
-        <Heading color="white" size={'xs'} fontWeight={'medium'}>
+        <Heading color={'white'} size={'xs'} fontWeight={'medium'}>
           My Profile
         </Heading>
       </CardHeader>
@@ -43,8 +43,8 @@ export default function ProfileFeature() {
           >
             <Box h={'full'} display={'flex'} justifyContent={'space-between'} mx={3}>
               <Avatar
-                size="lg"
-                border={'1px solid white'}
+                size={'lg'}
+                border={'3px solid rgb(45,45,45)'}
                 name={user?.full_name}
                 src={user?.profile_picture}
                 alignSelf={'center'}
@@ -55,10 +55,10 @@ export default function ProfileFeature() {
               <Button
                 alignSelf={'end'}
                 bottom={2}
-                color="white"
-                size="xs"
-                rounded="full"
-                variant="outline"
+                color={'white'}
+                size={'xs'}
+                rounded={'full'}
+                variant={'outline'}
                 _hover={{ bg: 'white', color: 'blue.500' }}
                 onClick={() => navigate('/profile/')}
               >
@@ -70,9 +70,9 @@ export default function ProfileFeature() {
           <Box>
             <Text
               w={'fit-content'}
-              fontSize="xl"
-              fontWeight="semibold"
-              color="white"
+              fontSize={'xl'}
+              fontWeight={'semibold'}
+              color={'white'}
               display={'flex'}
               alignItems={'center'}
               gap={1}
@@ -80,33 +80,33 @@ export default function ProfileFeature() {
               onClick={() => navigate('/profile')}
             >
               {user?.username}
-              <span style={{ color: '#1D9BF0' }}>
+              <span style={{ color: 'rgb(29, 155, 240)' }}>
                 <VscVerifiedFilled />
               </span>
             </Text>
 
-            <Text w={'fit-content'} fontSize="sm" fontWeight="thin" color="whiteAlpha.500">
+            <Text w={'fit-content'} fontSize={'md'} fontWeight={'thin'} color={'gray'}>
               @{user?.username}
             </Text>
 
-            <Text w={'fit-content'} fontSize="md" color="white" my={5}>
+            <Text w={'fit-content'} fontSize={'md'} color={'white'} my={5}>
               {user?.bio}
             </Text>
 
             <HStack w={'fit-content'} gap={3}>
               <HStack gap={1}>
-                <Text fontSize="md" color="white">
+                <Text fontSize={'md'} color={'white'}>
                   {GetUser.following.length}
                 </Text>
-                <Text fontSize="md" color="whiteAlpha.500" fontWeight="thin">
+                <Text fontSize={'md'} color={'gray'} fontWeight={'thin'}>
                   Following
                 </Text>
               </HStack>
               <HStack gap={1}>
-                <Text fontSize="md" color="white">
+                <Text fontSize={'md'} color={'white'}>
                   {GetUser.followers.length}
                 </Text>
-                <Text fontSize="md" color="whiteAlpha.500" fontWeight="thin">
+                <Text fontSize={'md'} color={'gray'} fontWeight={'thin'}>
                   Followers
                 </Text>
               </HStack>

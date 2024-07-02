@@ -3,7 +3,7 @@ import { BiLogoFacebook, BiLogoGithub, BiLogoInstagramAlt, BiLogoYoutube } from 
 
 export default function FooterComponent() {
   return (
-    <Card bg={'whiteAlpha.100'} rounded={'2xl'}>
+    <Card bg={'#333333'} rounded={'2xl'}>
       <CardHeader>
         <Heading color={'white'} size={'xs'} fontWeight={'medium'} display={'flex'} gap={1}>
           <Text>Developed by</Text>
