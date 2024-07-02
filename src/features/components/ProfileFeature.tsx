@@ -1,125 +1,94 @@
-import { RootState } from "@/store/type/RootState";
-import {
-    Avatar,
-    Box,
-    Button,
-    Card,
-    Flex,
-    HStack,
-    Stack,
-    Text
-} from "@chakra-ui/react"
-import { VscVerifiedFilled } from "react-icons/vsc";
-import { useSelector } from "react-redux";
-import { useGetUser } from "../hooks/GetUserHook";
+import { RootState } from '@/store/type/RootState';
+import { Avatar, Box, Button, HStack, Text } from '@chakra-ui/react';
+import { VscVerifiedFilled } from 'react-icons/vsc';
+import { useSelector } from 'react-redux';
+import { useGetUser } from '../hooks/GetUserHook';
 
 export default function ProfileFeature() {
-    const user = useSelector((state: RootState) => state.auth)
-    console.log("ini ProfileFeature USER: ", user);
-    const { GetUser, isLoading } = useGetUser();
+  const user = useSelector((state: RootState) => state.auth);
+  const { GetUser, isLoading } = useGetUser();
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-    if (isLoading) {
-        return <div>Loading...</div>
-    }
-    const { following, followers } = GetUser
-    return (
-        <Card bg="whiteAlpha.200" p={4}>
-            <Text color="white">My Profile</Text>
+  return (
+    <Box bg="whiteAlpha.100" h={420} display={'flex'}>
+      <Box display={'flex'} flexDirection={'column'} justifyContent={'space-between'} w={'100%'}>
+        <Box
+          bgImage={'https://th.bing.com/th/id/OIP.ZGNLwbqm0mRGg58CZmxdMAHaEo?pid=ImgDet&rs=1'}
+          h={'200px'}
+        >
+          <Box h={'full'} display={'flex'} justifyContent={'space-between'} mx={3}>
+            <Avatar
+              size="2xl"
+              border={'5px solid rgb(45,45,45)'}
+              name={user?.full_name}
+              src={user?.profile_picture}
+              alignSelf={'center'}
+              _hover={{ cursor: 'pointer' }}
+              bottom={-100}
+            />
 
-            <Box
-                pos="relative"
-                h="100px"
-                mt={3}
-                rounded="xl"
-                // bg={"green"}
-                bgImage={`url(https://th.bing.com/th/id/OIP.ZGNLwbqm0mRGg58CZmxdMAHaEo?pid=ImgDet&rs=1)`}
+            <Button
+              alignSelf={'end'}
+              bottom={-10}
+              color={'white'}
+              size={'sm'}
+              rounded={'full'}
+              variant={'outline'}
+              _hover={{ bg: 'white', color: 'blue.500' }}
             >
-                <Box
-                    pos="absolute"
-                    bottom={-10}
-                    left={4}
-                    p={1}
-                    bg="blackAlpha.800"
-                    rounded="full"
-                >
-                    <Avatar size="xl" name={user?.full_name} src={user?.profile_picture} />
-                </Box>
-            </Box>
+              Edit Profile
+            </Button>
+          </Box>
+        </Box>
 
-            <Flex justify="right">
-                <Button
-                    color="white"
-                    size="lg"
-                    rounded="full"
-                    variant="outline"
-                    mt={5}
-                    w="fit-content"
-                    _hover={{ bg: 'gray' }}
-                >
-                    Edit Profile
-                </Button>
-            </Flex>
+        <Box p={2}>
+          <Text
+            w={'fit-content'}
+            fontSize="xl"
+            fontWeight="semibold"
+            color={'white'}
+            display={'flex'}
+            alignItems={'center'}
+            gap={1}
+            _hover={{ cursor: 'pointer' }}
+          >
+            {user?.username}
+            <span style={{ color: '#1D9BF0' }}>
+              <VscVerifiedFilled />
+            </span>
+          </Text>
 
-            <Stack spacing={0}>
-                <Text mt={-5} fontSize="2xl" fontWeight="semibold" color="white" display={"flex"} alignItems={"center"} gap={1}>
-                    {user?.full_name} <span style={{ color: "#1D9BF0" }}><VscVerifiedFilled /></span>
-                </Text>
-                <Text fontSize='md' fontWeight={"thin"} color='whiteAlpha.600'>@{user?.username}</Text>
-                <Text fontSize='lg' color='whiteAlpha.800' mt={5}>{user?.bio}</Text>
-                <HStack fontSize='lg' mt={5}>
-                    <HStack>
-                        <Text color='whiteAlpha.800'>{following.length}</Text>
-                        <Text color='whiteAlpha.600'>Following</Text>
-                    </HStack>
-                    <HStack>
-                        <Text color='whiteAlpha.800'>{followers.length}</Text>
-                        <Text color='whiteAlpha.600'>Followers</Text>
-                    </HStack>
-                </HStack>
-            </Stack>
-        </Card>
-    )
+          <Text w={'fit-content'} fontSize={'md'} fontWeight={'thin'} color={'gray'}>
+            @{user?.username}
+          </Text>
+
+          <Text w={'fit-content'} fontSize={'md'} color={'white'} my={5}>
+            {user?.bio}
+          </Text>
+
+          <HStack w={'fit-content'} gap={3}>
+            <HStack gap={1}>
+              <Text fontSize={'md'} color={'white'}>
+                {GetUser.following.length}
+              </Text>
+              <Text fontSize={'md'} color={'gray'} fontWeight={'thin'}>
+                Following
+              </Text>
+            </HStack>
+            <HStack gap={1}>
+              <Text fontSize={'md'} color={'white'}>
+                {GetUser.followers.length}
+              </Text>
+              <Text fontSize={'md'} color={'gray'} fontWeight={'thin'}>
+                Followers
+              </Text>
+            </HStack>
+          </HStack>
+        </Box>
+      </Box>
+    </Box>
+  );
 }
-
-
-
-// /* eslint-disable @typescript-eslint/no-unused-vars */
-// import { Box, Text, Avatar } from '@chakra-ui/react'
-// import { useGetUser } from '../hooks/GetUserHook';
-// import { UserType } from '@/Types/UserType';
-// import { useSelector } from 'react-redux';
-// import { RootState } from '@/store/type/RootState';
-
-// export default function ProfileFeature() {
-//     const { GetUser } = useGetUser();
-//     const user = useSelector((state: RootState) => state.auth)
-//     return (
-//         <>
-//             <Box>
-//                 <Text color="white">My Profile</Text>
-//                 <Box
-//                     pos="relative"
-//                     h="70px"
-//                     mt={3}
-//                     rounded="xl"
-//                     bg={"green"}
-//                 >
-//                     <Box
-//                         pos="absolute"
-//                         bottom={-6}
-//                         left={4}
-//                         p={1}
-//                         bg="blackAlpha.800"
-//                         rounded="full"
-//                     >
-//                         <Avatar size="md" name={user?.full_name} src={user?.profile_picture} />
-//                     </Box>
-//                     <Box>
-//                         @{user?.username}
-//                     </Box>
-//                 </Box>
-//             </Box>
-//         </>
-//     )
-// }

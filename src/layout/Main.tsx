@@ -7,7 +7,7 @@ import ProfileFeature from '../components/Profile/Profile';
 
 export default function Main({ children }: { children: ReactNode }) {
   return (
-    <Box display={'flex'} h={'100vh'} my={1}>
+    <Box display={'flex'}>
       <Box w={'25%'} position="fixed" left={0} top={1} bottom={1}>
         <NavbarComponent />
       </Box>
