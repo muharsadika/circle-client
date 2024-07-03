@@ -18,8 +18,18 @@ import { usePostThread } from '../hooks/PostThreadHook';
 import { IoImageOutline } from 'react-icons/io5';
 
 export default function FormThreadFeature() {
-  const { handleChange, handlePost, isOpen, onOpen, onClose, user, setImage, textareaRef } =
-    usePostThread();
+  const {
+    handleChange,
+    handlePost,
+    isOpen,
+    onOpen,
+    onClose,
+    user,
+    setImage,
+    textareaRef,
+    isPending,
+    form,
+  } = usePostThread();
 
   return (
     <>
@@ -44,6 +54,8 @@ export default function FormThreadFeature() {
             ref={textareaRef}
             fontSize={'lg'}
             minHeight={'50px'}
+            name="content"
+            value={form.content}
           />
         </GridItem>
 
@@ -72,6 +84,7 @@ export default function FormThreadFeature() {
             onClick={() => {
               handlePost();
             }}
+            disabled={isPending}
           >
             Post
           </Button>
