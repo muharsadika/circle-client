@@ -21,30 +21,6 @@ export function usePostThread() {
 
   const [image, setImage] = useState<File | null>(null);
 
-  // function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-  //   const { name, value } = e.target;
-
-  //   // Jika elemen adalah input file, tangani secara khusus
-  //   if (e.target instanceof HTMLInputElement && e.target.files) {
-  //     setForm({
-  //       ...form,
-  //       [name]: e.target.files,
-  //     });
-  //   } else {
-  //     setForm({
-  //       ...form,
-  //       [name]: value,
-  //     });
-  //   }
-  // }
-
-  // function handleChange(e: ChangeEvent<HTMLInputElement>) {
-  //   setForm({
-  //     ...form,
-  //     [e.target.name]: e.target.files ? e.target.files : e.target.value,
-  //   });
-  // }
-
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, files } = e.target as HTMLInputElement & HTMLTextAreaElement;
     setForm({
@@ -79,28 +55,6 @@ export function usePostThread() {
 
   const user = useSelector((state: RootState) => state.auth);
 
-  // async function handlePost() {
-  // 	// setIsPosting(true);
-  // 	try {
-  // 		console.log(form);
-  // 		const formData = new FormData();
-  // 		if (image) {
-  // 			formData.append("image", image);
-  // 		}
-  // 		formData.append("content", form.content);
-  // 		await API.post("/thread", formData);
-  // 		// refetch();
-  // 	} catch (error) {
-  // 		console.log(error);
-  // 	} finally {
-  // 		// setIsPosting(false);
-  // 		setForm({
-  // 			content: "",
-  // 		});
-  // 		setImage(null);
-  // 	}
-  // }
-
   return {
     handleButtonClick,
     handleChange,
@@ -113,5 +67,6 @@ export function usePostThread() {
     onClose,
     user,
     textareaRef,
+    form,
   };
 }
