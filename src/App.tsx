@@ -1,27 +1,20 @@
-import { useEffect, useState } from "react";
-import {
-  Route,
-  Routes,
-  Navigate,
-  useNavigate,
-  Outlet
-} from "react-router-dom";
-import { RootState } from "./store/type/RootState";
-import { AUTH_CHECK, AUTH_ERROR } from "./store/RootReducer";
-import { useDispatch, useSelector } from "react-redux";
-import { API, SetAuthToken } from "./libs/API";
-import Main from "./layout/Main";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import Timeline from "./pages/Timeline";
-import Search from "./pages/Search";
-import Follow from "./pages/Follow";
-import Profile from "./pages/Profile";
-import ThreadDetail from "./pages/ThreadDetail";
+import { useEffect, useState } from 'react';
+import { Route, Routes, Navigate, useNavigate, Outlet } from 'react-router-dom';
+import { AUTH_CHECK, AUTH_ERROR } from './store/RootReducer';
+import { useDispatch } from 'react-redux';
+import { API, SetAuthToken } from './libs/API';
+import Main from './layout/Main';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import Timeline from './pages/Timeline';
+import Search from './pages/Search';
+import Follow from './pages/Follow';
+import Profile from './pages/Profile';
+import ThreadDetail from './pages/ThreadDetail';
 
 export default function App() {
-  const auth = useSelector((state: RootState) => state.auth);
-  console.log(auth);
+  // const auth = useSelector((state: RootState) => state.auth);
+  // console.log(auth);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
@@ -31,16 +24,16 @@ export default function App() {
   async function authCheck() {
     try {
       SetAuthToken(localStorage.token);
-      const response = await API.get("/check");
-      console.log("check auth app", response);
+      const response = await API.get('/check');
+      // console.log('check auth app', response);
 
       dispatch(AUTH_CHECK(response.data.user));
       setIsLoading(false);
     } catch (err) {
       dispatch(AUTH_ERROR());
-      console.log("auth check error", err);
+      // console.log('auth check error', err);
       setIsLoading(false);
-      navigate("/login");
+      navigate('/login');
     }
   }
 
@@ -72,21 +65,68 @@ export default function App() {
   return (
     <>
       {isLoading ? null : (
-          <Routes>
-            <Route path="/" element={<IsNotLogin />}>
-              <Route path="/" element={<Main> <Timeline /> </Main>} />
-              <Route path="/home" element={<Main> <Timeline /> </Main>} />
-              <Route path="/explore" element={<Main> <Search /> </Main>} />
-              <Route path="/follow" element={<Main> <Follow /> </Main>} />
-              <Route path="/profile" element={<Main> <Profile /> </Main>} />
-              <Route path="/thread/:id" element={<Main> <ThreadDetail /> </Main>} />
-            </Route>
+        <Routes>
+          <Route path="/" element={<IsNotLogin />}>
+            <Route
+              path="/"
+              element={
+                <Main>
+                  <Timeline />
+                </Main>
+              }
+            />
 
-            <Route path="/" element={<IsLogin />}>
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-            </Route>
-          </Routes>
+            <Route
+              path="/home"
+              element={
+                <Main>
+                  <Timeline />
+                </Main>
+              }
+            />
+
+            <Route
+              path="/explore"
+              element={
+                <Main>
+                  <Search />
+                </Main>
+              }
+            />
+
+            <Route
+              path="/follow"
+              element={
+                <Main>
+                  <Follow />
+                </Main>
+              }
+            />
+
+            <Route
+              path="/profile"
+              element={
+                <Main>
+                  <Profile />
+                </Main>
+              }
+            />
+
+            <Route
+              path="/thread/:id"
+              element={
+                <Main>
+                  <ThreadDetail />
+                </Main>
+              }
+            />
+          </Route>
+
+          <Route path="/" element={<IsLogin />}>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Route>
+        </Routes>
       )}
     </>
   );
