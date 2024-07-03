@@ -1,4 +1,4 @@
-import { Avatar, Box, HStack, Image, Text, VStack } from '@chakra-ui/react';
+import { Avatar, Box, Button, HStack, Image, Text, VStack } from '@chakra-ui/react';
 import { AiFillHeart } from 'react-icons/ai';
 import { useState } from 'react';
 import { ThreadType } from '@/Types/ThreadType';
@@ -8,10 +8,12 @@ import { useSelector } from 'react-redux';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { API } from '@/libs/API';
 import { FaRegComment } from 'react-icons/fa';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 
 export default function ThreadFeature(props: ThreadType) {
   const { content, image, user, replies, likes, id } = props;
   const [like, setLike] = useState({ thread: id });
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const userAuth = useSelector((state: RootState) => state?.auth);
   const queryClient = useQueryClient();
@@ -26,9 +28,27 @@ export default function ThreadFeature(props: ThreadType) {
       console.log(error);
     },
   });
+
+  const { mutate: handleDelete } = useMutation({
+    mutationFn: () => {
+      return API.delete(`thread/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['thread'] });
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
   function handleClick() {
     setLike({ thread: id });
     handleLike();
+  }
+
+  function handleDeleteClick() {
+    setIsDeleting(true);
+    handleDelete();
   }
 
   return (
@@ -60,25 +80,42 @@ export default function ThreadFeature(props: ThreadType) {
             )}
           </VStack>
 
-          <HStack w={'full'} gap={5} my={2}>
-            <HStack onClick={handleClick} cursor="pointer" color="whiteAlpha.600">
-              <AiFillHeart
-                size={20}
-                color={likes?.map((like) => like.user?.id).includes(userAuth.id) ? 'red' : 'gray'}
-              />
+          <HStack w={'full'} gap={5} my={2} justifyContent={'space-between'}>
+            <HStack>
+              <HStack onClick={handleClick} cursor="pointer" color="whiteAlpha.600">
+                <AiFillHeart
+                  size={20}
+                  color={likes?.map((like) => like.user?.id).includes(userAuth.id) ? 'red' : 'gray'}
+                />
 
-              <Text fontSize="sm">{likes?.length}</Text>
+                <Text fontSize="sm">{likes?.length}</Text>
+              </HStack>
+
+              <HStack color="whiteAlpha.600" cursor={'pointer'}>
+                <Link to={`/thread/${id}`}>
+                  <HStack>
+                    <FaRegComment size={20} />
+
+                    <Text fontSize="sm">{replies?.length}</Text>
+                  </HStack>
+                </Link>
+              </HStack>
             </HStack>
 
-            <HStack color="whiteAlpha.600" cursor={'pointer'}>
-              <Link to={`/thread/${id}`}>
-                <HStack>
-                  <FaRegComment size={20} />
-
-                  <Text fontSize="sm">{replies?.length}</Text>
-                </HStack>
-              </Link>
-            </HStack>
+            <Box mr={2}>
+              {userAuth.id === user?.id && (
+                <Button
+                  color={'red'}
+                  variant={'ghost'}
+                  size="xs"
+                  onClick={handleDeleteClick}
+                  isLoading={isDeleting}
+                  _hover={{ color: 'gray' }}
+                >
+                  <RiDeleteBin6Line size={20} />
+                </Button>
+              )}
+            </Box>
           </HStack>
         </VStack>
       </Box>
