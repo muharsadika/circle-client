@@ -21,18 +21,35 @@ export function usePostThread() {
 
   const [image, setImage] = useState<File | null>(null);
 
+  // function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  //   const { name, value } = e.target;
+
+  //   // Jika elemen adalah input file, tangani secara khusus
+  //   if (e.target instanceof HTMLInputElement && e.target.files) {
+  //     setForm({
+  //       ...form,
+  //       [name]: e.target.files,
+  //     });
+  //   } else {
+  //     setForm({
+  //       ...form,
+  //       [name]: value,
+  //     });
+  //   }
+  // }
+
   // function handleChange(e: ChangeEvent<HTMLInputElement>) {
-  // 	setForm({
-  // 		...form,
-  // 		[e.target.name]: e.target.files ? e.target.files : e.target.value,
-  // 	});
+  //   setForm({
+  //     ...form,
+  //     [e.target.name]: e.target.files ? e.target.files : e.target.value,
+  //   });
   // }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, files } = e.target as HTMLInputElement & HTMLTextAreaElement;
     setForm({
       ...form,
-      [name]: files ? files : value,
+      [name]: files ? files[0] : value,
     });
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
